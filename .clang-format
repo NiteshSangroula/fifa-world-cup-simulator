@@ -1,0 +1,50 @@
+# ─────────────────────────────────────────────────────────────
+#  .clang-format  —  FIFA World Cup Simulator
+#  Style: LLVM base with team adjustments
+#  Apply: clang-format -i src/**/*.c include/**/*.h
+# ─────────────────────────────────────────────────────────────
+
+BasedOnStyle: LLVM
+
+# ── Indentation ──────────────────────────────────────────────
+IndentWidth: 4
+TabWidth: 4
+UseTab: Never
+ContinuationIndentWidth: 4
+
+# ── Line length ──────────────────────────────────────────────
+ColumnLimit: 100
+
+# ── Braces ───────────────────────────────────────────────────
+BreakBeforeBraces: Allman
+
+# ── Spacing ──────────────────────────────────────────────────
+SpaceAfterCStyleCast: false
+SpaceBeforeParens: ControlStatements
+SpaceInEmptyParentheses: false
+SpacesInCStyleCastParentheses: false
+SpacesInParentheses: false
+
+# ── Alignment ────────────────────────────────────────────────
+AlignConsecutiveAssignments: Consecutive
+AlignConsecutiveDeclarations: Consecutive
+AlignTrailingComments: true
+AlignOperands: true
+
+# ── Pointers ─────────────────────────────────────────────────
+PointerAlignment: Right
+
+# ── Includes ─────────────────────────────────────────────────
+SortIncludes: CaseSensitive
+IncludeBlocks: Regroup
+
+# ── Functions ────────────────────────────────────────────────
+AllowShortFunctionsOnASingleLine: None
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLoopsOnASingleLine: false
+BinPackParameters: false
+BinPackArguments: false
+
+# ── Misc ─────────────────────────────────────────────────────
+MaxEmptyLinesToKeep: 1
+InsertTrailingCommas: None

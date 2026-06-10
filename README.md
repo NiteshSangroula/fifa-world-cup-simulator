@@ -1,6 +1,6 @@
 # ⚽ FIFA World Cup Simulator
 
-> A terminal-based FIFA World Cup tournament simulator written in C.  
+> A terminal-based FIFA World Cup tournament simulator written in C.
 > Built as a first-semester college project by a team of three.
 
 ---
@@ -17,7 +17,8 @@
 
 ## 📋 Features
 
-- [ ] Group stage simulation (8 groups × 4 teams)
+- [ ] Group stage simulation (12 groups × 4 teams)
+- [ ] Round of 32
 - [ ] Round of 16
 - [ ] Quarter-finals, Semi-finals, Final
 - [ ] Match outcome engine

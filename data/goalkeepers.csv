@@ -1,4 +1,101 @@
 id,name,country_id,age,position,diving,handling,kicking,reflexes,speed,positioning
+0101,Raúl Rangel,1,26,GK,75,72,70,78,48,74
+0112,Carlos Acevedo,1,30,GK,77,73,69,81,51,73
+0113,Guillermo Ochoa,1,40,GK,76,69,66,79,43,75
+0201,Ronwen Williams,2,34,GK,79,75,81,80,52,77
+0216,Sipho Chaine,2,29,GK,74,70,68,76,46,71
+0222,Ricardo Goss,2,32,GK,73,71,70,74,48,72
+0301,Kim Seung-Gyu,3,35,GK,77,74,75,79,50,76
+0312,Song Bum-Keun,3,28,GK,74,73,71,75,47,74
+0321,Jo Hyeon-Woo,3,34,GK,80,71,69,82,53,73
+0401,Matěj Kovář,4,26,GK,77,74,78,79,52,75
+0416,Jindřich Staněk,4,30,GK,79,75,72,81,49,77
+0423,Lukáš Horníček,4,23,GK,74,71,69,76,46,72
+0501,Dayne St. Clair,5,29,GK,74,71,73,76,50,72
+0516,Maxime Crépeau,5,32,GK,76,73,72,79,48,74
+0518,Owen Goodman,5,22,GK,72,68,66,74,45,69
+0601,Nikola Vasilj,6,30,GK,76,73,71,78,48,74
+0612,Mladen Jurkas,6,18,GK,73,69,70,75,51,71
+0622,Martin Zlomislic,6,27,GK,74,72,68,76,46,73
+0701,Gregor Kobel,7,28,GK,84,81,75,87,51,83
+0712,Yvon Mvogo,7,32,GK,78,74,72,80,48,76
+0721,Marvin Keller,7,23,GK,73,70,68,75,45,71
+0801,Mahmud Abunada,8,26,GK,73,70,69,75,47,72
+0821,Salah Zakaria,8,27,GK,74,71,68,76,46,71
+0822,Meshaal Barsham,8,28,GK,77,73,74,80,50,75
+0901,Alisson,9,33,GK,86,85,85,89,54,90
+0912,Weverton,9,38,GK,79,77,74,80,49,81
+0923,Ederson Moraes,9,32,GK,85,82,91,86,51,86
+1001,Yassine Bounou,10,35,GK,84,81,77,86,52,83
+1012,Munir Mohamedi,10,37,GK,76,74,71,78,46,76
+1022,Ahmed Reda Tagnaouti,10,30,GK,73,70,67,74,45,71
+1101,Johny Placide,11,38,GK,72,71,68,73,43,74
+1112,Alexandre Pierre,11,25,GK,71,67,65,73,48,68
+1123,Josue Duverger,11,26,GK,69,65,63,70,45,66
+1201,Angus Gunn,12,30,GK,76,73,72,78,48,74
+1212,Liam Kelly,12,30,GK,73,71,69,75,46,72
+1221,Craig Gordon,12,43,GK,72,74,70,73,38,76
+1301,Matt Turner,13,32,GK,77,74,71,81,46,75
+1324,Matt Freese,13,27,GK,72,70,68,74,45,71
+1325,Chris Brady,13,22,GK,73,69,66,76,48,70
+1401,Mert Gunok,14,37,GK,78,76,74,77,44,80
+1412,Altay Bayindir,14,28,GK,79,73,71,81,49,74
+1423,Ugurcan Cakir,14,30,GK,79,75,73,82,46,76
+1501,Mathew Ryan,15,34,GK,76,75,78,77,46,75
+1512,Paul Izzo,15,31,GK,71,68,67,73,44,70
+1518,Patrick Beach,15,23,GK,68,64,66,71,45,65
+1601,Gatito Fernandez,16,38,GK,74,72,70,75,42,76
+1612,Orlando Gill,16,26,GK,68,64,63,71,45,65
+1622,Gaston Olveira,16,33,GK,75,73,71,76,44,74
+1701,Manuel Neuer,17,40,GK,82,84,88,81,52,85
+1712,Oliver Baumann,17,36,GK,80,78,73,81,45,80
+1721,Alexander Nubel,17,29,GK,79,77,76,80,48,77
+1801,Eloy Room,18,37,GK,71,69,67,72,43,70
+1825,Tyrick Bodak,18,24,GK,66,61,63,68,44,62
+1826,Trevor Doornbusch,18,26,GK,67,63,62,69,45,64
+1901,Yahia Fofana,19,25,GK,77,74,73,79,48,75
+1916,Mohamed Kone,19,24,GK,70,65,66,72,44,67
+1923,Alban Lafont,19,27,GK,80,76,72,82,48,77
+2001,Hernan Galindez,20,39,GK,74,73,71,74,42,76
+2012,Moises Ramirez,20,25,GK,73,68,74,75,48,70
+2022,Gonzalo Valle,20,30,GK,69,66,65,71,45,68
+2101,Bart Verbruggen,21,23,GK,79,76,77,81,46,76
+2113,Robin Roefs,21,23,GK,69,67,65,71,44,66
+2123,Mark Flekken,21,32,GK,78,76,82,79,48,77
+2201,Zion Suzuki,22,23,GK,78,72,83,79,52,73
+2212,Keisuke Osako,22,26,GK,75,72,70,76,46,73
+2223,Tomoki Hayakawa,22,26,GK,71,68,67,73,44,69
+2301,Jacob Widell Zetterstrom,23,27,GK,75,72,70,76,44,72
+2312,Viktor Johansson,23,28,GK,79,74,71,81,48,74
+2323,Kristoffer Nordfeldt,23,36,GK,71,71,69,70,38,72
+2401,Mouhib Chamakh,24,21,GK,66,63,62,69,42,64
+2416,Aymen Dahmen,24,29,GK,74,70,67,76,45,71
+2422,Sabri Ben Hessen,24,29,GK,71,67,65,72,44,68
+2501,Thibaut Courtois,25,34,GK,88,89,75,89,46,89
+2512,Senne Lammens,25,23,GK,73,69,67,74,45,71
+2513,Mike Penders,25,20,GK,71,68,70,73,42,68
+2601,Mohamed El Shenawy,26,37,GK,79,77,74,78,44,80
+2616,El Mahdy Soliman,26,39,GK,71,70,68,72,38,73
+2623,Mostafa Shobeir,26,26,GK,73,69,70,76,46,71
+2626,Mohamed Alaa,26,23,GK,66,63,61,68,41,63
+2701,Alireza Beiranvand,27,33,GK,74,73,84,76,46,75
+2712,Payam Niazmand,27,31,GK,72,69,68,74,44,70
+2722,Hossein Hosseini,27,33,GK,73,70,67,75,45,71
+2801,Max Crocombe,28,32,GK,71,68,67,73,43,69
+2812,Alex Paulsen,28,23,GK,73,69,68,76,46,70
+2822,Michael Woud,28,27,GK,69,66,64,71,41,67
+2901,David Raya,29,30,GK,84,81,87,86,49,81
+2913,Joan Garcia,29,25,GK,78,74,72,81,48,75
+2923,Unai Simon,29,28,GK,84,81,78,86,47,83
+3001,Vozinha,30,40,GK,70,68,66,71,36,73
+3012,Marcio Rosa,30,29,GK,67,64,62,69,42,65
+3023,CJ dos Santos,30,25,GK,68,65,66,70,45,64
+3101,Nawaf Al-Aqidi,31,26,GK,73,70,68,76,48,71
+3121,Mohammed Al-Owais,31,34,GK,75,72,71,77,45,74
+3122,Ahmed Al-Kassar,31,35,GK,71,68,66,72,40,71
+3201,Sergio Rochet,32,33,GK,79,77,74,80,48,78
+3212,Santiago Mele,32,28,GK,74,71,69,76,46,72
+3223,Fernando Muslera,32,39,GK,73,72,70,73,38,75
 3301,Brice Samba,33,31,GK,82,80,78,83,60,81
 3316,Mike Maignan,33,29,GK,85,82,80,89,62,84
 3323,Robin Risser,33,20,GK,74,70,68,76,44,72
@@ -47,4 +144,3 @@ id,name,country_id,age,position,diving,handling,kicking,reflexes,speed,positioni
 4801,Luis Mejía,48,35,GK,72,70,68,73,40,74
 4812,César Samudio,48,32,GK,67,65,62,70,38,68
 4822,Orlando Mosquera,48,31,GK,73,69,66,76,45,72
-

@@ -484,7 +484,7 @@ Launch binary
 | Knockout rounds | R32 → R16 → QF → SF → Final |
 | Total group stage matches | 48 |
 | Total knockout matches | 32 |
-| Grand total | 80 matches |
+| Grand total | 104 matches |
 
 ### Standings tiebreaker order
 
@@ -507,7 +507,7 @@ Top 8 advance to Round of 32.
 
 | Operation | Feature | Details |
 |---|---|---|
-| **Create** | Add custom wildcard team | User enters team name and confederation. System auto-generates 26 players with stats in a user-defined rating range. Replaces one existing team. |
+| **Create** | Run a match simulation | Simulates a match between two teams, generates goal events, and writes a new match record to matches.csv along with updated player and team stats. |
 | **Read** | View all teams | All 48 countries with group, confederation, current standings. |
 | **Read** | View team squad | Full 26-player roster with stats and injury status for a selected country. |
 | **Read** | View player profile | Individual player — all base stats, tournament goals/assists, matches played, injury status. |

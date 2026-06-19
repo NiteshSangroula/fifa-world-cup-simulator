@@ -3,16 +3,18 @@
 
 #include "structs.h"
 
+#include <stddef.h>
+
 /* ── loaders ─────────────────────────────────────────────────────────────────
  * All return the number of records loaded (>= 0) or -1 on error.
  * Exception: loadTournamentState() returns 1 if loaded, 0 if no tournament
  * exists yet, -1 on error.
  * ─────────────────────────────────────────────────────────────────────────── */
 
-int loadCountries(Country *arr, int max);
-int loadPlayers(Player *arr, int max);
-int loadGoalkeepers(Goalkeeper *arr, int max);
-int loadGroups(TournamentTeam *arr, int max); /* reads wc_2026_groups.csv */
+size_t loadCountries(Country *arr, size_t max);
+size_t loadPlayers(Player *arr, size_t max);
+size_t loadGoalkeepers(Goalkeeper *arr, size_t max);
+size_t loadGroups(TournamentTeam *arr, size_t max); /* reads wc_2026_groups.csv */
 
 int loadTournamentState(TournamentState *state);
 int loadTournamentTeams(TournamentTeam *arr, int max);

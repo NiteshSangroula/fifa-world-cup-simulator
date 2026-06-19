@@ -6,7 +6,7 @@
 /* No logic in display.c — pure output only.
  * Every function receives all data as parameters. Never reads files directly. */
 
-void printGroupStandings(TournamentTeam *group, int count, Country *countries);
+void printGroupStandings(TournamentTeam *group, int count, Country *countries); // done
 
 void printAllGroups(TournamentTeam *teams, int team_count, Country *countries);
 

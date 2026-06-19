@@ -4,6 +4,8 @@
 #include "config.h"
 #include "enums.h"
 
+/* ── static data (loaded once, never modified at runtime) ─── */
+
 typedef struct
 {
     int           id;
@@ -33,7 +35,7 @@ typedef struct
     char     name[NAME_LEN];
     int      country_id;
     int      age;
-    Position position;
+    Position position; /* Always GK */
     int      diving;
     int      handling;
     int      kicking;
@@ -42,6 +44,8 @@ typedef struct
     int      positioning;
 } Goalkeeper;
 
+/* ── dynamic data (wiped and rebuilt each tournament) ─────── */
+
 typedef struct
 {
     int tournament_id;
@@ -49,7 +53,7 @@ typedef struct
     int goals;
     int assists;
     int matches_played;
-    int is_injured;
+    int is_injured; /* 0 = fit, 1 = injured */
 } PlayerStats;
 
 typedef struct
@@ -59,7 +63,7 @@ typedef struct
     int clean_sheets;
     int goals_conceded;
     int matches_played;
-    int is_injured;
+    int is_injured; /* 0 = fit, 1 = injured */
 } GKStats;
 
 typedef struct
@@ -87,8 +91,8 @@ typedef struct
     int   team1_score;
     int   team2_score;
     Stage stage;
-    char  group_name[GROUP_NAME_LEN];
-    int   is_simulated;
+    char  group_name[GROUP_NAME_LEN]; /* empty string for knockout matches */
+    int   is_simulated;               /* 0 = not yet played, 1 = done     */
     char  match_date[DATE_LEN];
 } Match;
 
@@ -97,9 +101,9 @@ typedef struct
     int   tournament_id;
     char  tournament_name[128];
     Stage current_stage;
-    int   groups_completed;
-    int   knockouts_completed;
-    int   tournament_winner;
+    int   groups_completed;    /* 0 or 1 */
+    int   knockouts_completed; /* 0 or 1 */
+    int   tournament_winner;   /* country_id, 0 if not finished */
 } TournamentState;
 
 typedef struct
@@ -111,23 +115,25 @@ typedef struct
     int  groups_advance;
     int  best_third_advance;
     char host[128];
-    int  random_draw;
+    int  random_draw; /* 0 = fixed draw, 1 = randomise */
 } TournamentConfig;
+
+/* ── simulation internals ────────────────────────────────── */
 
 typedef struct
 {
     int minute;
     int player_id;
-    int assister_id;
+    int assister_id; /* -1 if no assist recorded */
     int team_id;
-    int is_own_goal;
+    int is_own_goal; /* 0 = normal, 1 = own goal */
 } GoalEvent;
 
 typedef struct
 {
     int team1_id;
     int team2_id;
-    int played;
+    int played; /* 0 = fixture pending, 1 = simulated */
 } Fixture;
 
 #endif

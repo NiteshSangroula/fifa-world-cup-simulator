@@ -56,12 +56,12 @@ static Position parsePosition(char *position)
     return MID;
 }
 
-size_t loadCountries(Country *arr, size_t max)
+int loadCountries(Country *arr, int max)
 {
     FILE *file = fopen(PATH_COUNTRIES, "r");
     if (file == NULL)
     {
-        return 1;
+        return -1;
     }
 
     char line[256];
@@ -69,7 +69,7 @@ size_t loadCountries(Country *arr, size_t max)
     // skip header
     fgets(line, sizeof(line), file);
 
-    size_t count = 0;
+    int count = 0;
     // load all countries to the array
     while (count < max && fgets(line, sizeof(line), file))
     {
@@ -85,19 +85,19 @@ size_t loadCountries(Country *arr, size_t max)
     return count;
 }
 
-size_t loadPlayers(Player *arr, size_t max)
+int loadPlayers(Player *arr, int max)
 {
     FILE *file = fopen(PATH_PLAYERS, "r");
     if (file == NULL)
     {
-        return 1;
+        return -1;
     }
 
     char line[256];
 
     fgets(line, sizeof(line), file); // skip header
 
-    size_t count = 0;
+    int count = 0;
 
     while (count < max && fgets(line, sizeof(line), file) != NULL)
     {
@@ -120,19 +120,19 @@ size_t loadPlayers(Player *arr, size_t max)
 
     return count;
 }
-size_t loadGoalkeepers(Goalkeeper *arr, size_t max)
+int loadGoalkeepers(Goalkeeper *arr, int max)
 {
     FILE *file = fopen(PATH_GOALKEEPERS, "r");
     if (file == NULL)
     {
-        return 1;
+        return -1;
     }
 
     char line[256];
 
     fgets(line, sizeof(line), file); // skip header
 
-    size_t count = 0;
+    int count = 0;
 
     while (count < max && fgets(line, sizeof(line), file) != NULL)
     {

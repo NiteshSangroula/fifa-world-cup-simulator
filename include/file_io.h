@@ -11,10 +11,10 @@
  * exists yet, -1 on error.
  * ─────────────────────────────────────────────────────────────────────────── */
 
-size_t loadCountries(Country *arr, size_t max);
-size_t loadPlayers(Player *arr, size_t max);
-size_t loadGoalkeepers(Goalkeeper *arr, size_t max);
-size_t loadGroups(TournamentTeam *arr, size_t max); /* reads wc_2026_groups.csv */
+int loadCountries(Country *arr, int max);
+int loadPlayers(Player *arr, int max);
+int loadGoalkeepers(Goalkeeper *arr, int max);
+int loadGroups(TournamentTeam *arr, int max); /* reads wc_2026_groups.csv */
 
 int loadTournamentState(TournamentState *state);
 int loadTournamentTeams(TournamentTeam *arr, int max);

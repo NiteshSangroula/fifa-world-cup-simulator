@@ -3,6 +3,7 @@
 
 typedef enum
 {
+    CONFEDERATION_UNKNOWN = -1,
     UEFA,
     CONMEBOL,
     CONCACAF,

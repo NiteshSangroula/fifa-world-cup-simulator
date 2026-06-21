@@ -3,6 +3,8 @@
 
 #include "structs.h"
 
+#include <stddef.h>
+
 /* ── loaders ─────────────────────────────────────────────────────────────────
  * All return the number of records loaded (>= 0) or -1 on error.
  * Exception: loadTournamentState() returns 1 if loaded, 0 if no tournament

@@ -482,7 +482,7 @@ Launch binary
 | Additional qualifiers | Best 8 third-place teams |
 | Round of 32 teams | 32 (24 + 8 best thirds) |
 | Knockout rounds | R32 → R16 → QF → SF → Final |
-| Total group stage matches | 48 |
+| Total group stage matches | 72 |
 | Total knockout matches | 32 |
 | Grand total | 104 matches |
 

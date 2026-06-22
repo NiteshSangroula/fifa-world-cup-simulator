@@ -122,6 +122,16 @@ typedef struct
 
 typedef struct
 {
+    int xi_ids[XI_OUTFIELD];
+    int gk_id;
+    int def_ovr[XI_DEF]; /* overalls already computed */
+    int mid_ovr[XI_MID];
+    int fwd_ovr[XI_FWD];
+    int gk_ovr;
+} StartingXI;
+
+typedef struct
+{
     int minute;
     int player_id;
     int assister_id; /* -1 if no assist recorded */

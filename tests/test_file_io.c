@@ -1,34 +1,10 @@
 #include "config.h"
 #include "file_io.h"
 #include "structs.h"
+#include "test_utils.h"
 
 #include <stdio.h>
 #include <string.h>
-
-/* ── helpers ─────────────────────────────────────────────── */
-
-static int tests_run    = 0;
-static int tests_passed = 0;
-
-#define CHECK(label, condition)                                                                    \
-    do                                                                                             \
-    {                                                                                              \
-        tests_run++;                                                                               \
-        if (condition)                                                                             \
-        {                                                                                          \
-            tests_passed++;                                                                        \
-            printf("  PASS  %s\n", label);                                                         \
-        }                                                                                          \
-        else                                                                                       \
-        {                                                                                          \
-            printf("  FAIL  %s\n", label);                                                         \
-        }                                                                                          \
-    } while (0)
-
-static void print_summary(void)
-{
-    printf("\n%d / %d tests passed\n", tests_passed, tests_run);
-}
 
 /* ── static loaders ──────────────────────────────────────── */
 

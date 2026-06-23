@@ -33,3 +33,5 @@ compile_commands.json
 # ─── Valgrind / debug ────────────────────────────────────────
 vgcore.*
 core
+
+test

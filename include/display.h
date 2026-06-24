@@ -33,4 +33,18 @@ void printStatsMenu(void);
 
 void printChampion(int country_id, Country *countries, int c_count);
 
+void printTeamSquad(int          country_id,
+                    Player      *players,
+                    int          p_count,
+                    Goalkeeper  *gks,
+                    int          g_count,
+                    PlayerStats *pstats,
+                    int          ps_count,
+                    GKStats     *gkstats,
+                    int          gs_count,
+                    Country     *countries,
+                    int          c_count);
+
+void printGKProfile(Goalkeeper *gk, GKStats *gs, Country *countries, int c_count);
+
 #endif

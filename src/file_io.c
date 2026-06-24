@@ -1,3 +1,11 @@
+/*
+ * 1. parse strings to enum
+ * 2. load data from static files to array of structs
+ * 3. load data from dynamic files to array of structs
+ * 4. save data from array of structs to dynamic files
+ * 5. saveMatch() -> appends instead of writing the whole file
+ * 6. wipeDynamicFiles() -> clear all dynamic files
+ */
 #include "file_io.h"
 
 #include "enums.h"
@@ -18,14 +26,9 @@
 #define PATH_GKSTATS "data/dynamic/gk_stats.csv"
 #define PATH_MATCHES "data/dynamic/matches.csv"
 
-/*
-    UEFA,
-    CONMEBOL,
-    CONCACAF,
-    AFC,
-    CAF,
-    OFC
-    */
+/* --------------------------------------------------------------------
+ *                  1. Parse String to ENUMS
+ -------------------------------------------------------------------- */
 static Confederation parseConfederations(char *confederation)
 {
     if (strcmp(confederation, "UEFA") == 0)
@@ -75,8 +78,17 @@ static Stage parseStage(char *stage)
 }
 
 // ****************************************************************
-// ******************** 5 Load Static files ***********************
+// ******************** 2. Load Static files **********************
 // ****************************************************************
+
+/*
+ * 1. open
+ * 2. skip header
+ * 3. loop
+ * 4. parse
+ * 5. fill struct
+ * 6. return count
+ */
 
 // 1. Load Countries
 int loadCountries(Country *arr, int max)
@@ -223,7 +235,7 @@ int loadGroups(TournamentTeam *arr, int max)
 }
 
 // ****************************************************************
-// ******************** 5 Load Dynamic files **********************
+// ******************** 3. Load Dynamic files *********************
 // ****************************************************************
 
 int loadTournamentTeams(TournamentTeam *arr, int max)
@@ -367,7 +379,7 @@ int loadTournamentState(TournamentState *state)
 }
 
 // ****************************************************************
-// ******************** 5 SAVE FUNCTIONS **************************
+// ******************** 4. SAVE FUNCTIONS *************************
 // ****************************************************************
 
 int savePlayerStats(PlayerStats *arr, int count)
@@ -474,6 +486,9 @@ int saveTournamentState(TournamentState *state)
     return 1;
 }
 
+/* ----------------------------------------------------------------
+ *
+ */
 int saveMatch(Match *m)
 {
     FILE *file = fopen(PATH_MATCHES, "a"); /* append — not "w" */

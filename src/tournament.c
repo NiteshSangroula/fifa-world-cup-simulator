@@ -5,7 +5,7 @@
 #include "file_io.h"
 #include "simulation.h"
 #include "structs.h"
-#include "utility.h"
+#include "validation.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -622,7 +622,7 @@ void advanceKnockout(Match           *matches,
 
             state->current_stage = next;
             saveTournamentState(state);
-            printf("\n  %s complete! %s begins.\n", stageToString(current), stageToString(next));
+            printf("\n  %s complete! %s begins.\n", stageToStr(current), stageToStr(next));
         }
     }
 }

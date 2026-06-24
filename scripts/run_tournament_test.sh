@@ -9,7 +9,6 @@ gcc \
     src/simulation.c \
     src/tournament.c \
     src/file_io.c \
-    src/utility.c \
     src/validation.c \
     src/test.c \
     tests/test_utils.c \

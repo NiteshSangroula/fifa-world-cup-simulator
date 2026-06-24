@@ -27,7 +27,7 @@ static int cmpGoalEventsByMinute(const void *a, const void *b)
 
 // returns overall of players based on position fwd, mid, def
 // important stats for a position have higher weight
-static int overallRating(const Player *p)
+int overallRating(const Player *p)
 {
     switch (p->position)
     {
@@ -52,7 +52,7 @@ static int overallRating(const Player *p)
 }
 
 // overall of gk
-static int overallGK(const Goalkeeper *gk)
+int overallGK(const Goalkeeper *gk)
 {
     return (gk->reflexes * 25 + gk->diving * 20 + gk->positioning * 20 + gk->handling * 15 +
             gk->kicking * 12 + gk->speed * 8) /

@@ -7,7 +7,6 @@ gcc \
     -std=c17 \
     -Iinclude \
     src/simulation.c \
-    src/utility.c \
     src/validation.c \
     src/test.c \
     tests/test_utils.c \

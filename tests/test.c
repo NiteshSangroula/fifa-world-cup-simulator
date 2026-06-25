@@ -10,7 +10,7 @@ void test_display(void);
 int main(void)
 {
 
-    // test_file_io();
+     test_file_io();
 
     // test_simulation();
 

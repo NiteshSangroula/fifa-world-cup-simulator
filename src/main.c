@@ -11,7 +11,7 @@ int main(void)
     printf("   FIFA World Cup Simulator v%s\n", SIMULATOR_VERSION);
     printf("========================================\n\n");
 
-    test();
+    //test();
 
     printf("Tournament simulation coming soon...\n");
 

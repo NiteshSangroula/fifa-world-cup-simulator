@@ -64,8 +64,8 @@ void printCRUDMenu(void)
     printf("  TEAMS AND PLAYERS\n");
     printDivider(40);
     printf("  1. View all groups\n");
-    printf("  2. View team squad\n");
-    printf("  3. View player profile\n");
+    printf("  2. View all countries\n");
+    printf("  3. View team squad\n");
     printf("  4. search player profile\n");
     printf("  5. view player profile\n");
     printf("  6. Back\n");

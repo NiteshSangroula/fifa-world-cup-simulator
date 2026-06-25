@@ -200,6 +200,11 @@ int loadTournamentTeams(TournamentTeam *arr, int max)
 
     while (count < max && fgets(line, sizeof(line), file) != NULL)
     {
+
+        /* skip blank lines */
+        if (line[0] == '\n' || line[0] == '\r' || line[0] == '\0')
+            continue;
+
         arr[count].tournament_id = atoi(strtok(line, ","));
         arr[count].country_id    = atoi(strtok(NULL, ","));
         strncpy(arr[count].group_name, strtok(NULL, ","), GROUP_NAME_LEN - 1);
@@ -232,6 +237,10 @@ int loadPlayerStats(PlayerStats *arr, int max)
 
     while (count < max && fgets(line, sizeof(line), file) != NULL)
     {
+        /* skip blank lines */
+        if (line[0] == '\n' || line[0] == '\r' || line[0] == '\0')
+            continue;
+
         arr[count].tournament_id  = atoi(strtok(line, ","));
         arr[count].player_id      = atoi(strtok(NULL, ","));
         arr[count].goals          = atoi(strtok(NULL, ","));
@@ -258,6 +267,10 @@ int loadGKStats(GKStats *arr, int max)
 
     while (count < max && fgets(line, sizeof(line), file) != NULL)
     {
+        /* skip blank lines */
+        if (line[0] == '\n' || line[0] == '\r' || line[0] == '\0')
+            continue;
+
         arr[count].tournament_id  = atoi(strtok(line, ","));
         arr[count].gk_id          = atoi(strtok(NULL, ","));
         arr[count].clean_sheets   = atoi(strtok(NULL, ","));
@@ -284,6 +297,10 @@ int loadMatches(Match *arr, int max)
 
     while (count < max && fgets(line, sizeof(line), file) != NULL)
     {
+        /* skip blank lines */
+        if (line[0] == '\n' || line[0] == '\r' || line[0] == '\0')
+            continue;
+
         arr[count].id            = atoi(strtok(line, ","));
         arr[count].tournament_id = atoi(strtok(NULL, ","));
         arr[count].team1_id      = atoi(strtok(NULL, ","));
@@ -293,7 +310,7 @@ int loadMatches(Match *arr, int max)
         arr[count].stage         = strToStage(strtok(NULL, ","));
         strncpy(arr[count].group_name, strtok(NULL, ","), GROUP_NAME_LEN - 1);
         arr[count].is_simulated = atoi(strtok(NULL, ","));
-        strncpy(arr[count].match_date, strtok(NULL, ",\n"), DATE_LEN - 1);
+        // strncpy(arr[count].match_date, strtok(NULL, ",\n"), DATE_LEN - 1);
         count++;
     }
 
@@ -445,7 +462,7 @@ int saveMatch(Match *m)
         return -1;
 
     fprintf(file,
-            "%d,%d,%d,%d,%d,%d,%s,%s,%d,%s\n",
+            "%d,%d,%d,%d,%d,%d,%s,%s,%d\n",
             m->id,
             m->tournament_id,
             m->team1_id,
@@ -454,8 +471,7 @@ int saveMatch(Match *m)
             m->team2_score,
             stageToStr(m->stage),
             m->group_name,
-            m->is_simulated,
-            m->match_date);
+            m->is_simulated);
 
     fclose(file);
     return 1;
@@ -474,8 +490,8 @@ int wipeDynamicFiles(void)
         "against,goal_difference,points,stage_reached\n",
         "tournament_id,player_id,goals,assists,matches_played,is_injured\n",
         "tournament_id,gk_id,clean_sheets,goals_conceded,matches_played,is_injured\n",
-        "id,tournament_id,team1_id,team2_id,team1_score,team2_score,stage,group_name,is_simulated,"
-        "match_date\n"};
+        "id,tournament_id,team1_id,team2_id,team1_score,team2_score,stage,group_name,is_"
+        "simulated\n"};
 
     int n = sizeof(paths) / sizeof(paths[0]);
 

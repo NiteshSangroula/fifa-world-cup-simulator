@@ -62,6 +62,8 @@ const char *stageToStr(Stage s)
 
 Stage strToStage(const char *str)
 {
+    if (str == NULL)
+        return GROUP_STAGE;
     if (strcmp(str, "GROUP_STAGE") == 0)
         return GROUP_STAGE;
     if (strcmp(str, "ROUND_OF_32") == 0)

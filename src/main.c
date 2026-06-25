@@ -64,12 +64,14 @@ static void readString(const char *prompt, char *out, int max)
         out[len - 1] = '\0';
 }
 
+/*
 static void clearInputBuffer(void)
 {
     int c;
     while ((c = getchar()) != '\n' && c != EOF)
         ;
 }
+*/
 
 /* ------------- Load Static Data ------------------------ */
 static int loadStaticData(void)
@@ -140,7 +142,6 @@ static void handleCRUDMenu(void)
     {
         printCRUDMenu();
         int choice = readInt("");
-        clearInputBuffer();
 
         switch (choice)
         {
@@ -156,7 +157,6 @@ static void handleCRUDMenu(void)
         {
             viewAllCountries(countries, c_count);
             int id = readInt("  Enter Country ID: ");
-            clearInputBuffer();
             viewTeamSquad(id,
                           players,
                           p_count,
@@ -182,7 +182,6 @@ static void handleCRUDMenu(void)
         case 5:
         {
             int id = readInt("  Enter Player ID: ");
-            clearInputBuffer();
             viewPlayerProfile(id, players, p_count, pstats, ps_count, countries, c_count);
             break;
         }
@@ -206,7 +205,6 @@ static void handleStatsMenu(void)
     {
         printStatsMenu();
         int choice = readInt("");
-        clearInputBuffer();
 
         switch (choice)
         {
@@ -264,7 +262,6 @@ static void handleTournamentMenu(void)
 
         printTournamentMenu(state.current_stage);
         int choice = readInt("");
-        clearInputBuffer();
 
         switch (choice)
         {
@@ -381,7 +378,6 @@ static void startNewTournament(void)
 
     printf("  Random draw? (1 = yes, 0 = use real groups): ");
     int random_draw = readInt("");
-    clearInputBuffer();
     if (random_draw != 0 && random_draw != 1)
         random_draw = 0;
 
@@ -419,7 +415,11 @@ static void startNewTournament(void)
 
 static void resumeTournament(void)
 {
+    printf("yo ho is it calling ?");
     loadDynamicData();
+    /* debug — remove after fixing */
+    printf("DEBUG t_count=%d m_count=%d ps_count=%d\n", t_count, m_count, ps_count);
+    fflush(stdout);
 
     if (!state.groups_completed)
     {
@@ -453,13 +453,10 @@ int main(void)
 
     printf("Loading data...\n");
     if (!loadStaticData())
+    {
         return 1;
-    printf("countries: %d", c_count);
-    printf("players: %d", p_count);
-    printf("goalkeepers: %d", g_count);
+    }
     printf("Loaded %d countries, %d players, %d goalkeepers.\n", c_count, p_count, g_count);
-
-    /*
 
     int has_tournament = loadTournamentState(&state);
 
@@ -469,7 +466,6 @@ int main(void)
     {
         printMainMenu();
         int choice = readInt("");
-        clearInputBuffer();
 
         switch (choice)
         {
@@ -479,10 +475,14 @@ int main(void)
             break;
 
         case 2:
+            printf("Hello");
             if (has_tournament != 1)
                 printf("\n No tournament found. Start a new one.\n");
             else
+            {
+                printf("Yohohohho");
                 resumeTournament();
+            }
             break;
         case 3:
             handleStatsMenu();
@@ -499,6 +499,5 @@ int main(void)
     }
 
     printf("\n Goodbye.\n");
-    */
     return 0;
 }

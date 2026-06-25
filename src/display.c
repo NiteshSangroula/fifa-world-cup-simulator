@@ -92,7 +92,7 @@ void printStatsMenu(void)
 
 void printGroupStandings(TournamentTeam *group, int count, Country *countries, int c_count)
 {
-    printf("  %-20s %3s %3s %3s %3s %4s %4s %4s %4s\n",
+    printf("  %-23s %3s %3s %3s %3s %4s %4s %4s %4s\n",
            "Team",
            "MP",
            "W",
@@ -107,7 +107,7 @@ void printGroupStandings(TournamentTeam *group, int count, Country *countries, i
     for (int i = 0; i < count; i++)
     {
         const char *name = findCountryName(group[i].country_id, countries, c_count);
-        printf("  %-20s %3d %3d %3d %3d %4d %4d %4d %4d\n",
+        printf("  %-23s %3d %3d %3d %3d %4d %4d %4d %4d\n",
                name,
                group[i].matches_played,
                group[i].wins,
@@ -195,14 +195,14 @@ void printMatchResult(Match *m, Country *countries, int c_count)
     const char *t2 = findCountryName(m->team2_id, countries, c_count);
 
     if (m->stage == GROUP_STAGE)
-        printf("  %-20s %d - %d  %-20s  [Group %s]\n",
+        printf("  %-23s %d - %d  %-20s  [Group %s]\n",
                t1,
                m->team1_score,
                m->team2_score,
                t2,
                m->group_name);
     else
-        printf("  %-20s %d - %d  %-20s  [%s]\n",
+        printf("  %-23s %d - %d  %-20s  [%s]\n",
                t1,
                m->team1_score,
                m->team2_score,

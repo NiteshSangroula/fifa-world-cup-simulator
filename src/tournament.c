@@ -235,6 +235,40 @@ void simulateGroupStage(Fixture         *schedule,
         int t1 = findTeamIndex(team1_id, teams, t_count);
         int t2 = findTeamIndex(team2_id, teams, t_count);
 
+        for (int e = 0; e < event_count; e++)
+        {
+            for (int j = 0; j < ps_count; j++)
+                if (pstats[j].player_id == events[e].player_id)
+                {
+                    pstats[j].goals++;
+                    pstats[j].matches_played++;
+                    break;
+                }
+        }
+
+        /* update GK stats */
+        /* team that conceded = losing team's GK */
+        int conceded_by    = s1 > s2 ? team2_id : team1_id;
+        int goals_conceded = s1 > s2 ? s1 : s2;
+        int clean_sheet    = (s1 == 0 || s2 == 0);
+
+        for (int j = 0; j < gs_count; j++)
+        {
+            for (int k = 0; k < g_count; k++)
+                if (gks[k].id == gkstats[j].gk_id && gks[k].country_id == conceded_by)
+                {
+                    gkstats[j].goals_conceded += goals_conceded;
+                    gkstats[j].matches_played++;
+                    if (clean_sheet)
+                        gkstats[j].clean_sheets++;
+                    break;
+                }
+        }
+
+        savePlayerStats(pstats, ps_count);
+        saveGKStats(gkstats, gs_count);
+        // new
+
         if (t1 != -1)
         {
             teams[t1].matches_played++;
@@ -290,7 +324,7 @@ void simulateGroupStage(Fixture         *schedule,
         m.stage         = GROUP_STAGE;
         m.is_simulated  = 1;
         strncpy(m.group_name, group_name, GROUP_NAME_LEN - 1);
-        strncpy(m.match_date, "", DATE_LEN - 1); /* date not tracked for now */
+        // strncpy(m.match_date, "", DATE_LEN - 1); /* date not tracked for now */
 
         matches[*m_count] = m;
         (*m_count)++;
@@ -464,7 +498,7 @@ void generateKnockoutBracket(
         m.stage         = ROUND_OF_32;
         m.group_name[0] = '\0';
         m.is_simulated  = 0;
-        strncpy(m.match_date, "", DATE_LEN - 1);
+        // strncpy(m.match_date, "", DATE_LEN - 1);
 
         matches[*m_count] = m;
         (*m_count)++;
@@ -534,6 +568,42 @@ void advanceKnockout(Match           *matches,
         /* update stage_reached */
         int wi = findTeamIndex(winner_id, teams, t_count);
         int li = findTeamIndex(loser_id, teams, t_count);
+
+        /* update player stats for goal scorers */
+        for (int e = 0; e < event_count; e++)
+        {
+            for (int j = 0; j < ps_count; j++)
+                if (pstats[j].player_id == events[e].player_id)
+                {
+                    pstats[j].goals++;
+                    pstats[j].matches_played++;
+                    break;
+                }
+        }
+
+        /* update GK stats */
+        /* team that conceded = losing team's GK */
+        int conceded_by    = s1 > s2 ? team2_id : team1_id;
+        int goals_conceded = s1 > s2 ? s1 : s2;
+        int clean_sheet    = (s1 == 0 || s2 == 0);
+
+        for (int j = 0; j < gs_count; j++)
+        {
+            for (int k = 0; k < g_count; k++)
+                if (gks[k].id == gkstats[j].gk_id && gks[k].country_id == conceded_by)
+                {
+                    gkstats[j].goals_conceded += goals_conceded;
+                    gkstats[j].matches_played++;
+                    if (clean_sheet)
+                        gkstats[j].clean_sheets++;
+                    break;
+                }
+        }
+
+        savePlayerStats(pstats, ps_count);
+        saveGKStats(gkstats, gs_count);
+
+        // new
 
         if (li != -1)
             teams[li].stage_reached = current;
@@ -614,7 +684,7 @@ void advanceKnockout(Match           *matches,
                 m.stage         = next;
                 m.group_name[0] = '\0';
                 m.is_simulated  = 0;
-                strncpy(m.match_date, "", DATE_LEN - 1);
+                // strncpy(m.match_date, "", DATE_LEN - 1);
 
                 matches[*m_count] = m;
                 (*m_count)++;

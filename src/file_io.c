@@ -1,7 +1,15 @@
+/*
+ * 1. parse strings to enum
+ * 2. load data from static files to array of structs
+ * 3. load data from dynamic files to array of structs
+ * 4. save data from array of structs to dynamic files
+ * 5. saveMatch() -> appends instead of writing the whole file
+ * 6. wipeDynamicFiles() -> clear all dynamic files
+ */
 #include "file_io.h"
 
 #include "enums.h"
-#include "utility.h"
+#include "validation.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,65 +26,18 @@
 #define PATH_GKSTATS "data/dynamic/gk_stats.csv"
 #define PATH_MATCHES "data/dynamic/matches.csv"
 
+// ****************************************************************
+// ******************** 2. Load Static files **********************
+// ****************************************************************
+
 /*
-    UEFA,
-    CONMEBOL,
-    CONCACAF,
-    AFC,
-    CAF,
-    OFC
-    */
-static Confederation parseConfederations(char *confederation)
-{
-    if (strcmp(confederation, "UEFA") == 0)
-        return UEFA;
-    if (strcmp(confederation, "CONMEBOL") == 0)
-        return CONMEBOL;
-    if (strcmp(confederation, "CONCACAF") == 0)
-        return CONCACAF;
-    if (strcmp(confederation, "AFC") == 0)
-        return AFC;
-    if (strcmp(confederation, "CAF") == 0)
-        return CAF;
-    if (strcmp(confederation, "OFC") == 0)
-        return OFC;
-    return CONFEDERATION_UNKNOWN;
-}
-
-static Position parsePosition(char *position)
-{
-    if (strcmp(position, "GK") == 0)
-        return GK;
-    if (strcmp(position, "RB") == 0 || strcmp(position, "LB") == 0 || strcmp(position, "CB") == 0)
-        return DEF;
-    if (strcmp(position, "CM") == 0 || strcmp(position, "CAM") == 0 ||
-        strcmp(position, "LM") == 0 || strcmp(position, "RM") == 0 || strcmp(position, "CDM") == 0)
-        return MID;
-    if (strcmp(position, "ST") == 0 || strcmp(position, "LW") == 0 || strcmp(position, "RW") == 0)
-        return FWD;
-    return MID;
-}
-
-static Stage parseStage(char *stage)
-{
-    if (strcmp(stage, "GROUP_STAGE") == 0)
-        return GROUP_STAGE;
-    if (strcmp(stage, "ROUND_OF_32") == 0)
-        return ROUND_OF_32;
-    if (strcmp(stage, "ROUND_OF_16") == 0)
-        return ROUND_OF_16;
-    if (strcmp(stage, "QUARTER_FINAL") == 0)
-        return QUARTER_FINAL;
-    if (strcmp(stage, "SEMI_FINAL") == 0)
-        return SEMI_FINAL;
-    if (strcmp(stage, "FINAL") == 0)
-        return FINAL;
-    return GROUP_STAGE;
-}
-
-// ****************************************************************
-// ******************** 5 Load Static files ***********************
-// ****************************************************************
+ * 1. open
+ * 2. skip header
+ * 3. loop
+ * 4. parse
+ * 5. fill struct
+ * 6. return count
+ */
 
 // 1. Load Countries
 int loadCountries(Country *arr, int max)
@@ -98,7 +59,7 @@ int loadCountries(Country *arr, int max)
     {
         arr[count].id = atoi(strtok(line, ","));
         strcpy(arr[count].name, strtok(NULL, ","));
-        arr[count].confederation = parseConfederations(strtok(NULL, ","));
+        arr[count].confederation = strToConfed(strtok(NULL, ","));
         arr[count].fifa_ranking  = atoi(strtok(NULL, ","));
         count++;
     }
@@ -129,7 +90,7 @@ int loadPlayers(Player *arr, int max)
         strcpy(arr[count].name, strtok(NULL, ","));
         arr[count].country_id = atoi(strtok(NULL, ","));
         arr[count].age        = atoi(strtok(NULL, ","));
-        arr[count].position   = parsePosition(strtok(NULL, ","));
+        arr[count].position   = mapPosition(strtok(NULL, ","));
         arr[count].speed      = atoi(strtok(NULL, ","));
         arr[count].passing    = atoi(strtok(NULL, ","));
         arr[count].shooting   = atoi(strtok(NULL, ","));
@@ -166,7 +127,7 @@ int loadGoalkeepers(Goalkeeper *arr, int max)
         strcpy(arr[count].name, strtok(NULL, ","));
         arr[count].country_id  = atoi(strtok(NULL, ","));
         arr[count].age         = atoi(strtok(NULL, ","));
-        arr[count].position    = parsePosition(strtok(NULL, ","));
+        arr[count].position    = mapPosition(strtok(NULL, ","));
         arr[count].diving      = atoi(strtok(NULL, ","));
         arr[count].handling    = atoi(strtok(NULL, ","));
         arr[count].kicking     = atoi(strtok(NULL, ","));
@@ -223,7 +184,7 @@ int loadGroups(TournamentTeam *arr, int max)
 }
 
 // ****************************************************************
-// ******************** 5 Load Dynamic files **********************
+// ******************** 3. Load Dynamic files *********************
 // ****************************************************************
 
 int loadTournamentTeams(TournamentTeam *arr, int max)
@@ -250,7 +211,7 @@ int loadTournamentTeams(TournamentTeam *arr, int max)
         arr[count].goals_against   = atoi(strtok(NULL, ","));
         arr[count].goal_difference = atoi(strtok(NULL, ","));
         arr[count].points          = atoi(strtok(NULL, ","));
-        arr[count].stage_reached   = parseStage(strtok(NULL, ",\n"));
+        arr[count].stage_reached   = strToStage(strtok(NULL, ",\n"));
         count++;
     }
 
@@ -329,7 +290,7 @@ int loadMatches(Match *arr, int max)
         arr[count].team2_id      = atoi(strtok(NULL, ","));
         arr[count].team1_score   = atoi(strtok(NULL, ","));
         arr[count].team2_score   = atoi(strtok(NULL, ","));
-        arr[count].stage         = parseStage(strtok(NULL, ","));
+        arr[count].stage         = strToStage(strtok(NULL, ","));
         strncpy(arr[count].group_name, strtok(NULL, ","), GROUP_NAME_LEN - 1);
         arr[count].is_simulated = atoi(strtok(NULL, ","));
         strncpy(arr[count].match_date, strtok(NULL, ",\n"), DATE_LEN - 1);
@@ -357,7 +318,7 @@ int loadTournamentState(TournamentState *state)
 
     state->tournament_id = atoi(strtok(line, ","));
     strncpy(state->tournament_name, strtok(NULL, ","), TOURNEY_NAME_LEN - 1);
-    state->current_stage       = parseStage(strtok(NULL, ","));
+    state->current_stage       = strToStage(strtok(NULL, ","));
     state->groups_completed    = atoi(strtok(NULL, ","));
     state->knockouts_completed = atoi(strtok(NULL, ","));
     state->tournament_winner   = atoi(strtok(NULL, ",\n"));
@@ -367,7 +328,7 @@ int loadTournamentState(TournamentState *state)
 }
 
 // ****************************************************************
-// ******************** 5 SAVE FUNCTIONS **************************
+// ******************** 4. SAVE FUNCTIONS *************************
 // ****************************************************************
 
 int savePlayerStats(PlayerStats *arr, int count)
@@ -444,7 +405,7 @@ int saveTournamentTeams(TournamentTeam *arr, int count)
                 arr[i].goals_against,
                 arr[i].goal_difference,
                 arr[i].points,
-                stageToString(arr[i].stage_reached));
+                stageToStr(arr[i].stage_reached));
     }
 
     fclose(file);
@@ -465,7 +426,7 @@ int saveTournamentState(TournamentState *state)
             "%d,%s,%s,%d,%d,%d\n",
             state->tournament_id,
             state->tournament_name,
-            stageToString(state->current_stage),
+            stageToStr(state->current_stage),
             state->groups_completed,
             state->knockouts_completed,
             state->tournament_winner);
@@ -474,6 +435,9 @@ int saveTournamentState(TournamentState *state)
     return 1;
 }
 
+/* ----------------------------------------------------------------
+ *
+ */
 int saveMatch(Match *m)
 {
     FILE *file = fopen(PATH_MATCHES, "a"); /* append — not "w" */
@@ -488,7 +452,7 @@ int saveMatch(Match *m)
             m->team2_id,
             m->team1_score,
             m->team2_score,
-            stageToString(m->stage),
+            stageToStr(m->stage),
             m->group_name,
             m->is_simulated,
             m->match_date);

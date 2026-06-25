@@ -88,7 +88,7 @@ static Stage nextStage(Stage current)
 }
 
 /* returns expected match count for a knockout stage */
-static int expectedMatches(Stage stage)
+int expectedMatches(Stage stage)
 {
     switch (stage)
     {

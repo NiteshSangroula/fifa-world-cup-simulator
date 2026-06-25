@@ -35,8 +35,9 @@ void printMainMenu(void)
     printDivider(40);
     printf("  1. Start New Tournament\n");
     printf("  2. Resume Tournament\n");
-    printf("  3. Teams and Players\n");
-    printf("  4. Quit\n");
+    printf("  3. Statistics\n");
+    printf("  4. Teams and Players\n");
+    printf("  5. Quit\n");
     printDivider(40);
     printf("  Choice: ");
 }
@@ -65,7 +66,9 @@ void printCRUDMenu(void)
     printf("  1. View all groups\n");
     printf("  2. View team squad\n");
     printf("  3. View player profile\n");
-    printf("  4. Back\n");
+    printf("  4. search player profile\n");
+    printf("  5. view player profile\n");
+    printf("  6. Back\n");
     printDivider(40);
     printf("  Choice: ");
 }

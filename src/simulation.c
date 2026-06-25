@@ -265,7 +265,7 @@ static void resolveKnockoutDraw(float s1, float s2, int *score1, int *score2)
 {
     /* extra time — slightly higher chance of a goal, winner bias */
     float win_prob    = s1 / (s1 + s2);
-    float rand_factor = ((float)rand() / RAND_MAX) * 0.20f - 0.10f;
+    float rand_factor = (float)(((double)rand() / (double)RAND_MAX) * 0.20f - 0.10f);
     float outcome     = win_prob + rand_factor;
 
     if (outcome > 0.52f)
@@ -279,7 +279,7 @@ static void resolveKnockoutDraw(float s1, float s2, int *score1, int *score2)
     else
     {
         /* penalties — pure coin flip with slight strength bias */
-        if (((float)rand() / RAND_MAX) < win_prob)
+        if (((double)rand() / (double)RAND_MAX) < win_prob)
             (*score1)++;
         else
             (*score2)++;
@@ -329,7 +329,7 @@ void simulateMatch(int          team1_id,
     if (*score1 == *score2)
     {
         float win_prob    = s1 / (s1 + s2);
-        float rand_factor = ((float)rand() / RAND_MAX) * RAND_SWING - RAND_OFFSET;
+        float rand_factor = (float)(((double)rand() / (double)RAND_MAX) * RAND_SWING - RAND_OFFSET);
         float outcome     = win_prob + rand_factor;
 
         /* only nudge if there's a clear favourite (outcome far from 0.5) */

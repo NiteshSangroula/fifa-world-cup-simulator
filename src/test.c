@@ -7,6 +7,7 @@ void test_simulation(void);
 void test_tournament(void);
 void test_display(void);
 
+/*
 int main(void)
 {
 
@@ -19,3 +20,4 @@ int main(void)
 
     return 0;
 }
+*/

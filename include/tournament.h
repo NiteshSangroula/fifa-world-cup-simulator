@@ -74,4 +74,6 @@ void advanceKnockout(Match           *matches,
                      TournamentState *state,
                      int              batch_size);
 
+int expectedMatches(Stage stage);
+
 #endif

@@ -52,4 +52,7 @@ void searchPlayer(const char *name_query,
 // 7
 void viewTournamentSummary(TournamentState *state, Country *countries, int c_count);
 
+// 8
+void viewAllGroups(TournamentTeam *teams, int t_count, Country *countries, int c_count);
+
 #endif

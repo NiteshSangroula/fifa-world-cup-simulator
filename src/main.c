@@ -128,6 +128,7 @@ static void initStats(void)
         gkstats[i].matches_played = 0;
         gkstats[i].is_injured     = 0;
     }
+    ps_count = p_count;
     gs_count = g_count;
 
     savePlayerStats(pstats, ps_count);
@@ -415,11 +416,7 @@ static void startNewTournament(void)
 
 static void resumeTournament(void)
 {
-    printf("yo ho is it calling ?");
     loadDynamicData();
-    /* debug — remove after fixing */
-    printf("DEBUG t_count=%d m_count=%d ps_count=%d\n", t_count, m_count, ps_count);
-    fflush(stdout);
 
     if (!state.groups_completed)
     {
@@ -475,14 +472,10 @@ int main(void)
             break;
 
         case 2:
-            printf("Hello");
             if (has_tournament != 1)
                 printf("\n No tournament found. Start a new one.\n");
             else
-            {
-                printf("Yohohohho");
                 resumeTournament();
-            }
             break;
         case 3:
             handleStatsMenu();

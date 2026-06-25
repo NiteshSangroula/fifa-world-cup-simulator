@@ -235,39 +235,51 @@ void simulateGroupStage(Fixture         *schedule,
         int t1 = findTeamIndex(team1_id, teams, t_count);
         int t2 = findTeamIndex(team2_id, teams, t_count);
 
-        for (int e = 0; e < event_count; e++)
+        // players and gk
+        /* matches_played for all XI players */
+        for (int k = 0; k < XI_OUTFIELD; k++)
         {
             for (int j = 0; j < ps_count; j++)
-                if (pstats[j].player_id == events[e].player_id)
+                if (pstats[j].player_id == xi1.xi_ids[k])
                 {
-                    pstats[j].goals++;
+                    pstats[j].matches_played++;
+                    break;
+                }
+            for (int j = 0; j < ps_count; j++)
+                if (pstats[j].player_id == xi2.xi_ids[k])
+                {
                     pstats[j].matches_played++;
                     break;
                 }
         }
 
-        /* update GK stats */
-        /* team that conceded = losing team's GK */
-        int conceded_by    = s1 > s2 ? team2_id : team1_id;
-        int goals_conceded = s1 > s2 ? s1 : s2;
-        int clean_sheet    = (s1 == 0 || s2 == 0);
+        /* goals for scorers */
+        for (int e = 0; e < event_count; e++)
+            for (int j = 0; j < ps_count; j++)
+                if (pstats[j].player_id == events[e].player_id)
+                {
+                    pstats[j].goals++;
+                    break;
+                }
 
         for (int j = 0; j < gs_count; j++)
         {
-            for (int k = 0; k < g_count; k++)
-                if (gks[k].id == gkstats[j].gk_id && gks[k].country_id == conceded_by)
-                {
-                    gkstats[j].goals_conceded += goals_conceded;
-                    gkstats[j].matches_played++;
-                    if (clean_sheet)
-                        gkstats[j].clean_sheets++;
-                    break;
-                }
+            if (gkstats[j].gk_id == xi1.gk_id)
+            {
+                gkstats[j].goals_conceded += s2;
+                gkstats[j].matches_played++;
+                if (s2 == 0)
+                    gkstats[j].clean_sheets++;
+            }
+            if (gkstats[j].gk_id == xi2.gk_id)
+            {
+                gkstats[j].goals_conceded += s1;
+                gkstats[j].matches_played++;
+                if (s1 == 0)
+                    gkstats[j].clean_sheets++;
+            }
         }
-
-        savePlayerStats(pstats, ps_count);
-        saveGKStats(gkstats, gs_count);
-        // new
+        // end
 
         if (t1 != -1)
         {
@@ -569,41 +581,51 @@ void advanceKnockout(Match           *matches,
         int wi = findTeamIndex(winner_id, teams, t_count);
         int li = findTeamIndex(loser_id, teams, t_count);
 
-        /* update player stats for goal scorers */
-        for (int e = 0; e < event_count; e++)
+        // players and gk
+        /* matches_played for all XI players */
+        for (int k = 0; k < XI_OUTFIELD; k++)
         {
             for (int j = 0; j < ps_count; j++)
-                if (pstats[j].player_id == events[e].player_id)
+                if (pstats[j].player_id == xi1.xi_ids[k])
                 {
-                    pstats[j].goals++;
+                    pstats[j].matches_played++;
+                    break;
+                }
+            for (int j = 0; j < ps_count; j++)
+                if (pstats[j].player_id == xi2.xi_ids[k])
+                {
                     pstats[j].matches_played++;
                     break;
                 }
         }
 
-        /* update GK stats */
-        /* team that conceded = losing team's GK */
-        int conceded_by    = s1 > s2 ? team2_id : team1_id;
-        int goals_conceded = s1 > s2 ? s1 : s2;
-        int clean_sheet    = (s1 == 0 || s2 == 0);
+        /* goals for scorers */
+        for (int e = 0; e < event_count; e++)
+            for (int j = 0; j < ps_count; j++)
+                if (pstats[j].player_id == events[e].player_id)
+                {
+                    pstats[j].goals++;
+                    break;
+                }
 
         for (int j = 0; j < gs_count; j++)
         {
-            for (int k = 0; k < g_count; k++)
-                if (gks[k].id == gkstats[j].gk_id && gks[k].country_id == conceded_by)
-                {
-                    gkstats[j].goals_conceded += goals_conceded;
-                    gkstats[j].matches_played++;
-                    if (clean_sheet)
-                        gkstats[j].clean_sheets++;
-                    break;
-                }
+            if (gkstats[j].gk_id == xi1.gk_id)
+            {
+                gkstats[j].goals_conceded += s2;
+                gkstats[j].matches_played++;
+                if (s2 == 0)
+                    gkstats[j].clean_sheets++;
+            }
+            if (gkstats[j].gk_id == xi2.gk_id)
+            {
+                gkstats[j].goals_conceded += s1;
+                gkstats[j].matches_played++;
+                if (s1 == 0)
+                    gkstats[j].clean_sheets++;
+            }
         }
-
-        savePlayerStats(pstats, ps_count);
-        saveGKStats(gkstats, gs_count);
-
-        // new
+        // end
 
         if (li != -1)
             teams[li].stage_reached = current;

@@ -213,6 +213,7 @@ void searchPlayer(const char *name_query,
 
 /* ── 7. view tournament summary ──────────────────────────── */
 
+// doesn't work
 void viewTournamentSummary(TournamentState *state, Country *countries, int c_count)
 {
     printf("\n  === TOURNAMENT SUMMARY ===\n");

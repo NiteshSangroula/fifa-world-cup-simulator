@@ -143,6 +143,7 @@ void printAllGroups(TournamentTeam *teams, int t_count, Country *countries, int 
 
 /* ── bracket ─────────────────────────────────────────────── */
 
+// doesn't work
 void printBracket(Match *matches, int m_count, Country *countries, int c_count)
 {
     Stage       stages[] = {ROUND_OF_32, ROUND_OF_16, QUARTER_FINAL, SEMI_FINAL, FINAL};
@@ -434,6 +435,7 @@ void printTeamSquad(int          country_id,
 
 /* ── champion announcement ───────────────────────────────── */
 
+// doesn't work
 void printChampion(int country_id, Country *countries, int c_count)
 {
     const char *name = findCountryName(country_id, countries, c_count);

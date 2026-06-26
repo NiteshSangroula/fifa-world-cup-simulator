@@ -343,6 +343,9 @@ void simulateGroupStage(Fixture         *schedule,
 
         saveMatch(&m);
         saveTournamentTeams(teams, t_count);
+        // players and gk stats not working
+        savePlayerStats(pstats, ps_count);
+        saveGKStats(gkstats, gs_count);
 
         schedule[i].played = 1;
         simulated++;

@@ -6,24 +6,45 @@
 /* No logic in display.c — pure output only.
  * Every function receives all data as parameters. Never reads files directly. */
 
-void printGroupStandings(TournamentTeam *group, int count, Country *countries);
+void printGroupStandings(TournamentTeam *group, int count, Country *countries, int c_count);
 
-void printAllGroups(TournamentTeam *teams, int team_count, Country *countries);
+void printAllGroups(TournamentTeam *teams, int t_count, Country *countries, int c_count);
 
-void printBracket(Match *matches, int count, Country *countries);
+void printBracket(Match *matches, int m_count, Country *countries, int c_count);
 
-void printPlayerProfile(Player *p, PlayerStats *ps, Country *countries);
+void printPlayerProfile(Player *p, PlayerStats *ps, Country *countries, int c_count);
 
-void printMatchResult(Match *m, Country *countries);
+void printMatchResult(Match *m, Country *countries, int c_count);
 
-void printAllResults(Match *matches, int count, Country *countries);
+void printAllResults(Match *matches, int m_count, Country *countries, int c_count);
 
-void printTopScorers(
-    Player *players, PlayerStats *pstats, int count, Country *countries, int top_n);
+void printTopScorers(Player      *players,
+                     int          p_count,
+                     PlayerStats *pstats,
+                     int          ps_count,
+                     Country     *countries,
+                     int          c_count,
+                     int          top_n);
 
 void printMainMenu(void);
 void printTournamentMenu(Stage current);
 void printCRUDMenu(void);
 void printStatsMenu(void);
+
+void printChampion(int country_id, Country *countries, int c_count);
+
+void printTeamSquad(int          country_id,
+                    Player      *players,
+                    int          p_count,
+                    Goalkeeper  *gks,
+                    int          g_count,
+                    PlayerStats *pstats,
+                    int          ps_count,
+                    GKStats     *gkstats,
+                    int          gs_count,
+                    Country     *countries,
+                    int          c_count);
+
+void printGKProfile(Goalkeeper *gk, GKStats *gs, Country *countries, int c_count);
 
 #endif

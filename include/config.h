@@ -24,7 +24,7 @@
 #define XI_FWD 3
 
 /* ── simulation ──────────────────────────────────────────── */
-#define GOAL_EVENT_DELAY 800 /* ms between goal playback events */
+#define GOAL_EVENT_DELAY 2000 /* ms between goal playback events */
 #define WIN_THRESHOLD 0.55f
 #define LOSS_THRESHOLD 0.45f
 #define RAND_SWING 0.30f  /* full width of random factor     */

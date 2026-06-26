@@ -3,42 +3,56 @@
 
 #include "structs.h"
 
+// 1
 void viewAllTeams(Country *countries, int c_count, TournamentTeam *teams, int t_count);
 
+// 2
 void viewTeamSquad(int          country_id,
                    Player      *players,
                    int          p_count,
                    Goalkeeper  *gks,
                    int          g_count,
                    PlayerStats *pstats,
-                   GKStats     *gkstats);
+                   int          ps_count,
+                   GKStats     *gkstats,
+                   int          gs_count,
+                   Country     *countries,
+                   int          c_count);
 
-void viewPlayerProfile(
-    int player_id, Player *players, PlayerStats *pstats, int ps_count, Country *countries);
+// 3
+void viewPlayerProfile(int          player_id,
+                       Player      *players,
+                       int          p_count,
+                       PlayerStats *pstats,
+                       int          ps_count,
+                       Country     *countries,
+                       int          c_count);
 
-/* Blocked if tournament has already started (state->groups_completed == 1).
- * Prompts user for stat name and value. Validates. Updates array only —
- * does NOT write back to the static CSV. */
-void updatePlayerStat(int player_id, Player *players, int p_count, TournamentState *state);
+// 4
+void viewGKProfile(int         gk_id,
+                   Goalkeeper *gks,
+                   int         g_count,
+                   GKStats    *gkstats,
+                   int         gs_count,
+                   Country    *countries,
+                   int         c_count);
 
-/* Calls confirmAction() before marking is_injured = 1.
- * Persists via savePlayerStats() immediately. */
-void injurePlayer(int player_id, PlayerStats *pstats, int count);
+// 5
+void viewAllCountries(Country *countries, int c_count);
 
-/* Routes to simulateGroupStage() or advanceKnockout() based on current stage.
- * Passes all global arrays through. */
-void runSimulation(int              batch_size,
-                   TournamentState *state,
-                   Fixture         *schedule,
-                   int              fixture_count,
-                   TournamentTeam  *teams,
-                   int              t_count,
-                   Match           *matches,
-                   int             *match_count,
-                   Player          *players,
-                   Goalkeeper      *gks,
-                   PlayerStats     *pstats,
-                   GKStats         *gkstats,
-                   Country         *countries);
+// 6
+void searchPlayer(const char *name_query,
+                  Player     *players,
+                  int         p_count,
+                  Goalkeeper *gks,
+                  int         g_count,
+                  Country    *countries,
+                  int         c_count);
+
+// 7
+void viewTournamentSummary(TournamentState *state, Country *countries, int c_count);
+
+// 8
+void viewAllGroups(TournamentTeam *teams, int t_count, Country *countries, int c_count);
 
 #endif

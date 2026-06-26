@@ -93,7 +93,7 @@ typedef struct
     Stage stage;
     char  group_name[GROUP_NAME_LEN]; /* empty string for knockout matches */
     int   is_simulated;               /* 0 = not yet played, 1 = done     */
-    char  match_date[DATE_LEN];
+    // char  match_date[DATE_LEN];
 } Match;
 
 typedef struct

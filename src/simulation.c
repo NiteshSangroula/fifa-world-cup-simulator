@@ -13,17 +13,21 @@ typedef struct
     int sort_stat;
 } Candidate;
 
+// descending comparator for overall
 static int cmpCandidatesDesc(const void *a, const void *b)
 {
     return ((Candidate *)b)->sort_stat - ((Candidate *)a)->sort_stat;
 }
 
+// ascending comparator for goal scored by minute
 static int cmpGoalEventsByMinute(const void *a, const void *b)
 {
     return ((GoalEvent *)a)->minute - ((GoalEvent *)b)->minute;
 }
 
-static int overallRating(const Player *p)
+// returns overall of players based on position fwd, mid, def
+// important stats for a position have higher weight
+int overallRating(const Player *p)
 {
     switch (p->position)
     {
@@ -47,7 +51,8 @@ static int overallRating(const Player *p)
     }
 }
 
-static int overallGK(const Goalkeeper *gk)
+// overall of gk
+int overallGK(const Goalkeeper *gk)
 {
     return (gk->reflexes * 25 + gk->diving * 20 + gk->positioning * 20 + gk->handling * 15 +
             gk->kicking * 12 + gk->speed * 8) /
@@ -100,6 +105,7 @@ static int findPlayerIndex(int player_id, Player *players, int p_count)
  * then sort them in ascending order based on ovr
  * pick the 4 top def, 1 gk, 3 mid, 3 fwd
  */
+// Refactor
 int pickStartingXI(int          country_id,
                    StartingXI  *out,
                    Player      *players,
@@ -116,6 +122,7 @@ int pickStartingXI(int          country_id,
     Candidate fwds[OUTFIELD_PER_TEAM];
     size_t    def_count = 0, mid_count = 0, fwd_count = 0;
 
+    // load all players from given country id to their respective positions
     for (int i = 0; i < p_count; i++)
     {
         if (players[i].country_id != country_id)
@@ -148,13 +155,17 @@ int pickStartingXI(int          country_id,
         }
     }
 
+    // if not enough players at any position return 0
     if (def_count < XI_DEF || mid_count < XI_MID || fwd_count < XI_FWD)
         return 0;
 
+    // sort players based on ovr in desc order
     qsort(defs, def_count, sizeof(Candidate), cmpCandidatesDesc);
     qsort(mids, mid_count, sizeof(Candidate), cmpCandidatesDesc);
     qsort(fwds, fwd_count, sizeof(Candidate), cmpCandidatesDesc);
 
+    // select the top players at mid, fwd, def
+    // fill in StartingXI struct
     for (int i = 0; i < XI_DEF; i++)
     {
         out->xi_ids[i]  = players[defs[i].player_index].id;
@@ -198,6 +209,8 @@ int pickStartingXI(int          country_id,
 /*
  * atk = (ovr of all fwd + ovr of all mid) / (number of fwd + mid)
  * def = (ovr of all def + ovr of the gk)
+ * attack is slightly favoured as 99 atk 55 def should perform better
+ * than 55 atk and 99 def team on paper
  */
 float calculateTeamStrength(StartingXI *xi)
 {
@@ -252,7 +265,7 @@ static void resolveKnockoutDraw(float s1, float s2, int *score1, int *score2)
 {
     /* extra time — slightly higher chance of a goal, winner bias */
     float win_prob    = s1 / (s1 + s2);
-    float rand_factor = ((float)rand() / RAND_MAX) * 0.20f - 0.10f;
+    float rand_factor = (float)(((double)rand() / (double)RAND_MAX) * 0.20f - 0.10f);
     float outcome     = win_prob + rand_factor;
 
     if (outcome > 0.52f)
@@ -266,7 +279,7 @@ static void resolveKnockoutDraw(float s1, float s2, int *score1, int *score2)
     else
     {
         /* penalties — pure coin flip with slight strength bias */
-        if (((float)rand() / RAND_MAX) < win_prob)
+        if (((double)rand() / (double)RAND_MAX) < win_prob)
             (*score1)++;
         else
             (*score2)++;
@@ -316,7 +329,7 @@ void simulateMatch(int          team1_id,
     if (*score1 == *score2)
     {
         float win_prob    = s1 / (s1 + s2);
-        float rand_factor = ((float)rand() / RAND_MAX) * RAND_SWING - RAND_OFFSET;
+        float rand_factor = (float)(((double)rand() / (double)RAND_MAX) * RAND_SWING - RAND_OFFSET);
         float outcome     = win_prob + rand_factor;
 
         /* only nudge if there's a clear favourite (outcome far from 0.5) */
@@ -421,6 +434,7 @@ int generateGoalEvents(int         team1_id,
         }
     }
 
+    // sort goals based on minutes
     qsort(events, event_count, sizeof(GoalEvent), cmpGoalEventsByMinute);
     return (int)event_count;
 }

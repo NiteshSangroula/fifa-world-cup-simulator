@@ -70,4 +70,8 @@ void playbackEvents(GoalEvent *events,
                     int        score1,
                     int        score2);
 
+int overallRating(const Player *p);
+
+int overallGK(const Goalkeeper *gk);
+
 #endif

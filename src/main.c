@@ -218,7 +218,8 @@ static void handleStatsMenu(void)
             break;
 
         case 3:
-            printBracket(matches, m_count, countries, c_count);
+            printf("Feature still under development.");
+            // printBracket(matches, m_count, countries, c_count);
             break;
 
         case 4:
@@ -377,10 +378,12 @@ static void startNewTournament(void)
     if (strlen(name) == 0)
         strncpy(name, "FIFA World Cup 2026", TOURNEY_NAME_LEN - 1);
 
+    /*
     printf("  Random draw? (1 = yes, 0 = use real groups): ");
     int random_draw = readInt("");
     if (random_draw != 0 && random_draw != 1)
         random_draw = 0;
+        */
 
     /* wipe previous data */
     wipeDynamicFiles();
@@ -417,6 +420,8 @@ static void startNewTournament(void)
 static void resumeTournament(void)
 {
     loadDynamicData();
+    // to calculate standing after resuming tournament
+    calculateAllStandings(teams, t_count);
 
     if (!state.groups_completed)
     {

@@ -348,6 +348,10 @@ void simulateGroupStage(Fixture         *schedule,
         simulated++;
     }
 
+    // new
+    // for calculating group standing after every match
+    calculateAllStandings(teams, t_count);
+
     /* check if all group fixtures are done */
     int all_done = 1;
     for (int i = 0; i < f_count; i++)
